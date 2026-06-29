@@ -2,12 +2,14 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import AXIOS from "../api/axiosInstance";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, TextField, Card, CardContent, Typography } from "@mui/material";
-
+import { Button, TextField, Card, CardContent, Typography, InputAdornment, IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   const { login } = useContext(AuthContext);
@@ -53,12 +55,21 @@ function Signin() {
 
             <TextField
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               fullWidth
               margin="normal"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setShowPassword((p) => !p)} edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Button
@@ -73,6 +84,9 @@ function Signin() {
 
           <Typography sx={{ mt: 2 }}>
             New user? <Link to="/signup">Signup here</Link>
+          </Typography>
+          <Typography sx={{ mt: 1 }}>
+            <Link to="/forgot-password">Forgot Password?</Link>
           </Typography>
         </CardContent>
       </Card>
