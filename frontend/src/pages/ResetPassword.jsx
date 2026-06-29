@@ -34,7 +34,6 @@ function ResetPassword() {
       <Card sx={{ width: 400, padding: 2 }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>Reset Password</Typography>
-
           {message && <Typography color="primary" sx={{ mb: 2 }}>{message} Redirecting...</Typography>}
           {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
 
