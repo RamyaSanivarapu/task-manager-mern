@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { getTheme } from "./theme/theme";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthProvider";
 
 function Main() {
   const [mode, setMode] = React.useState("light");
