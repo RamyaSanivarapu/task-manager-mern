@@ -1,12 +1,16 @@
 import { useState } from "react";
 import AXIOS from "../api/axiosInstance";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, TextField, Card, CardContent, Typography } from "@mui/material";
+import { Button, TextField, Card, CardContent, Typography, MenuItem, InputAdornment, IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState("user");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -15,16 +19,11 @@ function Signup() {
     e.preventDefault();
 
     try {
-      await AXIOS.post("/auth/signup", {
-        name,
-        email,
-        password,
-        role: "user",
-      });
+      await AXIOS.post("/auth/signup", { name, email, password, role });
 
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      setError(err.response?.data?.error || "Something went wrong");
     }
   };
 
@@ -64,12 +63,33 @@ function Signup() {
             <TextField
               label="Password"
               fullWidth
-              type="password"
+              type={showPassword ? "text" : "password"}
               margin="normal"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setShowPassword((p) => !p)} edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+
+            <TextField
+              select
+              label="Role"
+              fullWidth
+              margin="normal"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <MenuItem value="user">User</MenuItem>
+              <MenuItem value="admin">Admin</MenuItem>
+            </TextField>
 
             <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
               Signup

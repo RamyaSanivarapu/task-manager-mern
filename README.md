@@ -156,3 +156,10 @@ This project is designed like a **real company dashboard**, showing:
 
 ## 📜 License
 MIT License  
+
+## credintails
+email:minnu@gmail.com -- Minnu@123 -admin(new)
+email:ramya@gmail.com -- Ramya@123 -admin
+email:satya@gmail.com -- Satya@123 - user
+email:sai@gmail.com -- Sai@123 - user
+email:surya@gmial.com -- Surya@123 -user
